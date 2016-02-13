@@ -22,10 +22,13 @@ function getStyle(obj,name) {
 		return getComputedStyle(obj,false)[name];
 	}
 }
-function startMove(obj,attr,iTarget,fnFunction) {
+function startMove(obj,json,fnFunction) {
 	clearInterval(obj.timer);
+
 	obj.timer=setInterval(function () {
-		var cur=0;
+		for(attr in json)
+		{
+			var cur=0;
 		if(attr=='opacity')
 		{
 			cur=parseFloat(getStyle(obj,attr))*100;
@@ -34,9 +37,9 @@ function startMove(obj,attr,iTarget,fnFunction) {
 		{
 			cur=parseInt(getStyle(obj,attr));
 		}
-		var speed=(iTarget-cur)/10;
+		var speed=(json[attr]-cur)/10;
 		speed=speed>0?Math.ceil(speed):Math.floor(speed);
-		if(cur==iTarget)
+		if(cur==json[attr])
 		{
 			clearInterval(obj.timer);
 			if(fnFunction)
@@ -56,5 +59,8 @@ function startMove(obj,attr,iTarget,fnFunction) {
 				obj.style[attr]=cur+speed+'px';
 			}
 		}
+
+		}
+		
 	},30);
 }
