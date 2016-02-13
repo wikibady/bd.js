@@ -24,7 +24,7 @@ function getStyle(obj,name) {
 }
 function startMove(obj,json,fnFunction) {
 	clearInterval(obj.timer);
-
+	var bfinish=true;
 	obj.timer=setInterval(function () {
 		for(attr in json)
 		{
@@ -39,7 +39,11 @@ function startMove(obj,json,fnFunction) {
 		}
 		var speed=(json[attr]-cur)/10;
 		speed=speed>0?Math.ceil(speed):Math.floor(speed);
-		if(cur==json[attr])
+		if(cur!=json[attr])
+		{
+			bfinish=false;
+		}
+		if(bfinish)
 		{
 			clearInterval(obj.timer);
 			if(fnFunction)
