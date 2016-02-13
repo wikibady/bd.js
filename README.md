@@ -9,4 +9,4 @@ now have 3 functions:
 >>it can get a elements' style from css.
 
 >startMove
->>it can let a result that change a elements' style to a target aim.
+>>it can let a result that change a elements' styles to a target aim.
