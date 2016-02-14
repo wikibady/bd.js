@@ -10,3 +10,6 @@ now have 3 functions:
 
 >startMove
 >>it can let a result that change a elements' styles to a target aim.
+
+>Ajax
+>>a ASY Ajax function 
