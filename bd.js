@@ -68,3 +68,42 @@ function startMove(obj,json,fnFunction) {
 		
 	},30);
 }
+
+function Ajax (url,fnSucess,fnFaild) {
+	//创建ajax对象
+	if(window.XMLHttpRequest)
+	{
+		var oAjax=new XMLHttpRequest();
+	}
+	else
+	{
+		var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	//连接服务器
+	oAjax.open('get',url,true);
+
+	//发送请求
+	oAjax.send();
+
+	//接受返回
+	oAjax.onreadystatechange=function()
+	{
+		//浏览器和服务器交互到第几步？
+		if(oAjax.readyState==4)//读取完成
+		{
+			if(oAjax.status==200)//读取成功
+			{
+				fnSucess(oAjax.responseText);
+			}
+			else
+			{
+				if(fnFaild)
+				{
+					fnFaild(oAjax.status);
+				}	
+			}
+		}
+	}
+
+}
