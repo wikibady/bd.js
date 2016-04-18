@@ -1,3 +1,44 @@
+(function(){//主函数，用来添加属性。
+	window['BD']={
+		BDevent:{
+			addEvent:function(element,eventType,eventFunction){
+				if(element.addEventListener){//DOM2级
+					element.addEventListener(eventType,eventFunction,false);
+				}
+				else if(element.attachEvent){//兼容IE
+					element.attachEvent("on"+eventType,eventFunction);
+				}
+				else{//DOM0级
+					element["on"+eventType]=eventFunction;
+				}
+			},
+			removeEvent:function(element,eventType,eventFunction){
+				if(element.removeEventListener){//DOM2级
+					element.removeEventListener(eventType,eventFunction,false);
+				}
+				else if(element.detachEvent){//兼容IE
+					element.detachEvent("on"+eventType,eventFunction);
+				}
+				else{//DOM0级
+					element["on"+eventType]=null;
+				}
+			},
+			getEvent:function(event){
+				return event?event:window.event;
+			},//获取事件
+			getTarget:function(event){
+				return event.target?event.target:event.srcElement;
+			},//获取事件触发对象
+			preventDefault:function(event){
+				event.preventDefault?event.preventDefault():event.returnValue=false;
+			},//阻止默认事件
+			stopBubble:function(event){
+				event.stopPropagation?event.stopPropagation():event.cancelBubble=true;
+			},//阻止事件冒泡
+		}
+	};//给window添加自己的命名空间
+})()
+
 function getByClass(oParent,sClass)
 {
 	var aEle = oParent.getElementsByTagName('*');
